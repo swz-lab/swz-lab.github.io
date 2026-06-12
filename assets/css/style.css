@@ -131,3 +131,26 @@ a { color: var(--color-primary); }
   .nav-menu.open { display: flex; }
   .hero h1 { font-size: 2.2rem; }
 }
+
+/* ---------- 앵커 이동 시 고정 헤더 보정 ---------- */
+section { scroll-margin-top: 60px; }
+
+/* ---------- Publications ---------- */
+.pub-year { margin-bottom: 1.75rem; }
+.pub-year h3 {
+  font-size: 1.2rem; font-weight: 700; margin-bottom: 0.6rem;
+  color: var(--color-primary);
+}
+[data-theme="dark"] .pub-year h3 { color: #9db1dd; }
+.pub-list { list-style: none; }
+.pub-list li {
+  padding: 0.5rem 0 0.5rem 0.25rem; border-bottom: 1px dashed var(--color-border);
+}
+.pub-tag {
+  display: inline-block; font-size: 0.72rem; font-weight: 700;
+  padding: 0.1rem 0.5rem; border-radius: 999px; margin-right: 0.45rem;
+  vertical-align: 1px; letter-spacing: 0.03em;
+}
+.pub-tag.journal { background: var(--color-primary); color: #fff; }
+.pub-tag.conference { background: var(--color-primary-soft); color: var(--color-primary); border: 1px solid var(--color-primary); }
+[data-theme="dark"] .pub-tag.conference { color: #9db1dd; border-color: #38507f; }

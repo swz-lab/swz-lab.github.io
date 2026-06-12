@@ -42,7 +42,8 @@
   const root = document.documentElement;
   const toggle = document.getElementById("themeToggle");
   const saved = localStorage.getItem("swzlab-theme");
-  if (saved === "dark" || (!saved && window.matchMedia("(prefers-color-scheme: dark)").matches)) {
+  const prefersDark = window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches;
+  if (saved === "dark" || (!saved && prefersDark)) {
     root.setAttribute("data-theme", "dark");
   }
   toggle.addEventListener("click", function () {
@@ -57,27 +58,61 @@
     navMenu.classList.toggle("open");
     hamburger.classList.toggle("active");
   });
-  navMenu.addEventListener("click", function (e) {
-    if (e.target.tagName === "A") {
-      navMenu.classList.remove("open");
-      hamburger.classList.remove("active");
-    }
-  });
 
-  /* ---------- 4. 현재 섹션 메뉴 하이라이트 ---------- */
-  const links = navMenu.querySelectorAll("a");
-  const sections = main.querySelectorAll("section");
-  const observer = new IntersectionObserver(
-    function (entries) {
-      entries.forEach(function (entry) {
-        if (entry.isIntersecting) {
-          links.forEach(function (l) {
-            l.classList.toggle("active", l.getAttribute("href") === "#" + entry.target.id);
-          });
-        }
-      });
-    },
-    { rootMargin: "-40% 0px -55% 0px" }
-  );
-  sections.forEach(function (s) { observer.observe(s); });
+  /* ---------- 4. 현재 섹션 메뉴 하이라이트 (스크롤 위치 기반) ---------- */
+  const links = Array.prototype.slice.call(navMenu.querySelectorAll("a"));
+  const sections = Array.prototype.slice.call(main.querySelectorAll("section"));
+  const headerH = document.querySelector(".site-header").offsetHeight;
+  let clickLock = false; // 클릭 직후 스크롤 애니메이션 중 깜빡임 방지
+
+  function setActive(id) {
+    links.forEach(function (l) {
+      l.classList.toggle("active", l.getAttribute("href") === "#" + id);
+    });
+  }
+
+  function currentSectionId() {
+    // 페이지 맨 아래: 마지막 섹션
+    if (window.innerHeight + window.scrollY >= document.body.offsetHeight - 2) {
+      return sections[sections.length - 1].id;
+    }
+    // 헤더 바로 아래 기준선을 지난 마지막 섹션
+    const line = window.scrollY + headerH + 1;
+    let id = sections[0].id;
+    sections.forEach(function (s) {
+      if (s.offsetTop <= line) id = s.id;
+    });
+    return id;
+  }
+
+  function onScroll() {
+    if (clickLock) return;
+    setActive(currentSectionId());
+  }
+  window.addEventListener("scroll", onScroll, { passive: true });
+  window.addEventListener("resize", onScroll);
+  onScroll();
+
+  // 클릭 시 즉시 하이라이트 고정, 스크롤 종료 후 잠금 해제
+  let unlockTimer = null;
+  navMenu.addEventListener("click", function (e) {
+    if (e.target.tagName !== "A") return;
+    navMenu.classList.remove("open");
+    hamburger.classList.remove("active");
+    const id = e.target.getAttribute("href").slice(1);
+    setActive(id);
+    clickLock = true;
+    clearTimeout(unlockTimer);
+    // smooth scroll이 끝날 때까지 잠금 유지
+    const release = function () {
+      clearTimeout(unlockTimer);
+      unlockTimer = setTimeout(function () {
+        clickLock = false;
+        window.removeEventListener("scroll", release);
+        setActive(currentSectionId());
+      }, 120);
+    };
+    window.addEventListener("scroll", release, { passive: true });
+    unlockTimer = setTimeout(function () { clickLock = false; }, 1200);
+  });
 })();
