@@ -1,36 +1,499 @@
 <!DOCTYPE html>
-<html lang="ko" data-theme="light">
+<html lang="ko" data-lang="ko">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="SWZ Lab — DX · Information Security · Applied AI" />
-  <title>SWZ Lab</title>
-  <link rel="stylesheet" href="assets/css/style.css" />
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='8' fill='%235B5FD6'/><text x='16' y='23' font-size='19' text-anchor='middle' fill='white' font-family='sans-serif' font-weight='bold'>S</text></svg>">
+<script>(function(){var d=document.documentElement;d.setAttribute('data-lang','ko');try{d.setAttribute('data-theme',matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');}catch(e){d.setAttribute('data-theme','light');}})();</script>
+<title>SWZ Lab · Chrome 확장 프로그램 / Chrome Extensions</title>
+<style>
+  :root{
+    --peri:#5B5FD6; --peri-2:#7C80E8; --peri-soft:#EEF0FF;
+    --bg:#F7F8FC; --surface:#FFFFFF; --surface-2:#FFFFFF;
+    --text:#1C1E33; --muted:#5B607A; --line:#E6E8F2;
+    --chip:#EEF0FF; --chip-text:#4A4FC4;
+    --kofi:#FF5E5B; --shadow:0 10px 30px rgba(30,34,90,.08);
+    --radius:20px;
+  }
+  html[data-theme="dark"]{
+    --peri:#8C90FF; --peri-2:#A9ADFF; --peri-soft:#20233F;
+    --bg:#0E1020; --surface:#171A2E; --surface-2:#1E2138;
+    --text:#EDEEF7; --muted:#A6ABC8; --line:#2A2E48;
+    --chip:#242844; --chip-text:#B9BCFF;
+    --kofi:#FF6B68; --shadow:0 12px 34px rgba(0,0,0,.4);
+  }
+  *{box-sizing:border-box}
+  body{
+    margin:0; background:var(--bg); color:var(--text);
+    font-family:-apple-system,BlinkMacSystemFont,"Pretendard","Apple SD Gothic Neo","Segoe UI",Roboto,"Noto Sans KR",sans-serif;
+    line-height:1.6; -webkit-font-smoothing:antialiased; transition:background .3s,color .3s;
+  }
+  .wrap{max-width:960px;margin:0 auto;padding:0 20px}
+  a{color:inherit}
+
+  /* Top bar */
+  .topbar{position:sticky;top:0;z-index:20;background:color-mix(in srgb,var(--bg) 82%,transparent);
+    backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+  .topbar .wrap{display:flex;align-items:center;justify-content:space-between;height:60px}
+  .brand{display:flex;align-items:center;gap:10px;font-weight:800;letter-spacing:-.02em}
+  .brand .logo{width:30px;height:30px;border-radius:9px;background:linear-gradient(135deg,var(--peri),var(--peri-2));
+    display:grid;place-items:center;color:#fff;font-weight:900;font-size:15px}
+  .controls{display:flex;gap:8px}
+  .btn-ghost{border:1px solid var(--line);background:var(--surface);color:var(--text);
+    border-radius:999px;padding:7px 14px;font-size:13px;font-weight:700;cursor:pointer;transition:.2s}
+  .btn-ghost:hover{border-color:var(--peri);color:var(--peri)}
+
+  /* Hero */
+  .hero{padding:64px 0 34px;text-align:center;position:relative;overflow:hidden}
+  .hero .eyebrow{display:inline-block;font-size:13px;font-weight:800;color:var(--peri);
+    background:var(--peri-soft);padding:6px 14px;border-radius:999px;margin-bottom:18px}
+  .hero h1{font-size:clamp(30px,5vw,48px);line-height:1.15;margin:.1em 0 .35em;letter-spacing:-.03em;font-weight:900}
+  .hero h1 .en{display:block;font-size:.5em;color:var(--muted);font-weight:800;margin-top:.25em}
+  .hero p{font-size:17px;color:var(--muted);max-width:640px;margin:0 auto 8px}
+  .hero .note{font-size:13.5px;color:var(--muted);opacity:.85}
+  .hero .badges{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:22px}
+  .hero .badge{font-size:13px;font-weight:700;background:var(--surface);border:1px solid var(--line);
+    padding:8px 15px;border-radius:999px;box-shadow:var(--shadow)}
+
+  /* Section */
+  .section-head{display:flex;align-items:center;gap:12px;margin:46px 0 18px}
+  .section-head .dot{width:10px;height:10px;border-radius:50%;background:var(--peri)}
+  .section-head h2{font-size:21px;margin:0;font-weight:800;letter-spacing:-.02em}
+  .section-head .en{color:var(--muted);font-weight:700;font-size:15px}
+
+  /* Card */
+  .card{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);
+    padding:26px;margin-bottom:18px;box-shadow:var(--shadow);transition:transform .2s,border-color .2s}
+  .card:hover{transform:translateY(-3px);border-color:var(--peri)}
+  .card-top{display:flex;gap:16px;align-items:flex-start}
+  .icon{width:56px;height:56px;flex:0 0 56px;border-radius:15px;display:grid;place-items:center;font-size:27px;
+    background:linear-gradient(135deg,var(--peri-soft),var(--surface-2));border:1px solid var(--line)}
+  .card h3{margin:0;font-size:19px;font-weight:800;letter-spacing:-.02em}
+  .card h3 .en{display:block;font-size:13.5px;color:var(--muted);font-weight:700;margin-top:2px}
+  .oneliner{margin:14px 0 16px;color:var(--text);font-size:15px}
+  .feat{list-style:none;padding:0;margin:0 0 18px;display:grid;gap:9px}
+  .feat li{position:relative;padding-left:26px;font-size:14.5px;color:var(--text)}
+  .feat li::before{content:"";position:absolute;left:4px;top:9px;width:8px;height:8px;border-radius:50%;
+    background:var(--peri);box-shadow:0 0 0 4px var(--peri-soft)}
+  .meta{display:flex;flex-wrap:wrap;gap:7px;margin-bottom:18px}
+  .chip{font-size:12px;font-weight:700;background:var(--chip);color:var(--chip-text);padding:5px 11px;border-radius:999px}
+  .chip.star{color:#B98900;background:#FFF4D6}
+  html[data-theme="dark"] .chip.star{color:#FFD86B;background:#3A3216}
+  .chip.top{color:#fff;background:linear-gradient(135deg,var(--peri),var(--peri-2))}
+  .card-actions{display:flex;gap:10px;flex-wrap:wrap}
+  .btn-install{display:inline-flex;align-items:center;gap:8px;background:linear-gradient(135deg,var(--peri),var(--peri-2));
+    color:#fff;text-decoration:none;font-weight:800;font-size:14px;padding:11px 20px;border-radius:12px;
+    box-shadow:0 6px 18px color-mix(in srgb,var(--peri) 40%,transparent);transition:.2s}
+  .btn-install:hover{filter:brightness(1.06);transform:translateY(-1px)}
+  .btn-copy{border:1px solid var(--line);background:var(--surface-2);color:var(--muted);font-weight:700;font-size:13px;
+    padding:11px 16px;border-radius:12px;cursor:pointer;transition:.2s}
+  .btn-copy:hover{border-color:var(--peri);color:var(--peri)}
+  .caution{font-size:12.5px;color:var(--muted);margin:-6px 0 16px;padding:9px 13px;background:var(--surface-2);
+    border-left:3px solid var(--peri);border-radius:8px}
+
+  /* Ko-fi */
+  .kofi{margin:52px 0 20px;text-align:center;background:linear-gradient(135deg,var(--peri-soft),var(--surface));
+    border:1px solid var(--line);border-radius:26px;padding:40px 24px;box-shadow:var(--shadow)}
+  .kofi h2{margin:0 0 8px;font-size:24px;font-weight:900;letter-spacing:-.02em}
+  .kofi p{margin:0 auto 22px;color:var(--muted);max-width:520px}
+  .btn-kofi{display:inline-flex;align-items:center;gap:10px;background:var(--kofi);color:#fff;text-decoration:none;
+    font-weight:800;font-size:16px;padding:14px 30px;border-radius:14px;box-shadow:0 8px 22px rgba(255,94,91,.4);transition:.2s}
+  .btn-kofi:hover{transform:translateY(-2px);filter:brightness(1.05)}
+
+  /* Footer */
+  footer{border-top:1px solid var(--line);margin-top:44px;padding:30px 0 60px;text-align:center;color:var(--muted);font-size:13.5px}
+  footer .priv{max-width:640px;margin:0 auto 14px}
+
+  /* language toggle visibility */
+  html[data-lang="ko"] [data-only="en"]{display:none}
+  html[data-lang="en"] [data-only="ko"]{display:none}
+  html[data-lang="en"] .card h3 .en,
+  html[data-lang="en"] .hero h1 .en{color:var(--text)}
+
+  .toast{position:fixed;bottom:26px;left:50%;transform:translateX(-50%) translateY(20px);
+    background:var(--text);color:var(--bg);padding:11px 20px;border-radius:12px;font-weight:700;font-size:14px;
+    opacity:0;pointer-events:none;transition:.25s;z-index:50}
+  .toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+</style>
 </head>
 <body>
-  <!-- 헤더/내비게이션: assets/js/main.js가 menu.config.js를 읽어 자동 생성 -->
-  <header class="site-header">
-    <nav class="nav container">
-      <a class="brand" href="#home">SWZ<span class="brand-dot">.</span>Lab</a>
-      <button class="hamburger" id="hamburgerBtn" aria-label="메뉴 열기">
-        <span></span><span></span><span></span>
-      </button>
-      <ul class="nav-menu" id="navMenu"><!-- 메뉴 자동 생성 --></ul>
-      <button class="theme-toggle" id="themeToggle" aria-label="테마 전환" title="라이트/다크 전환">
-        <span class="icon-sun">☀</span><span class="icon-moon">🌙</span>
-      </button>
-    </nav>
-  </header>
 
-  <main id="siteMain"><!-- 섹션 자동 생성 --></main>
-
-  <footer class="site-footer">
-    <div class="container">
-      <p>© 2026 SWZ Lab. All rights reserved.</p>
+<div class="topbar">
+  <div class="wrap">
+    <div class="brand"><span class="logo">S</span> SWZ&nbsp;Lab</div>
+    <div class="controls">
+      <button class="btn-ghost" id="langBtn">EN</button>
+      <button class="btn-ghost" id="themeBtn">🌙 다크</button>
     </div>
-  </footer>
+  </div>
+</div>
 
-  <script src="assets/js/menu.config.js"></script>
-  <script src="assets/js/main.js"></script>
+<header class="hero">
+  <div class="wrap">
+    <span class="eyebrow">SWZ Lab · Chrome Web Store</span>
+    <h1>Chrome 확장 프로그램<span class="en">Chrome Extensions</span></h1>
+    <p data-only="ko">브라우저를 더 빠르고, 깔끔하고, 편리하게 — SWZ Lab이 만든 크롬 확장 프로그램 모음입니다.</p>
+    <p data-only="en">Make your browser faster, cleaner, and more convenient — a collection of Chrome extensions by SWZ Lab.</p>
+    <p class="note" data-only="ko">모두 무료이며, 모든 작업은 사용자의 기기 안에서만 처리됩니다. 어떤 데이터도 외부로 전송하지 않습니다.</p>
+    <p class="note" data-only="en">All free. Everything runs on your device — no data ever leaves your browser.</p>
+    <div class="badges">
+      <span class="badge">🧹 <span data-only="ko">유틸리티 3종</span><span data-only="en">3 utilities</span></span>
+      <span class="badge">🎓 <span data-only="ko">서울대 도서관 3종</span><span data-only="en">3 SNU Library tools</span></span>
+      <span class="badge">🔒 <span data-only="ko">데이터 수집 없음</span><span data-only="en">No data collection</span></span>
+    </div>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <!-- GROUP A -->
+  <div class="section-head">
+    <span class="dot"></span>
+    <h2><span data-only="ko">브라우저 유틸리티</span><span data-only="en">Browser Utilities</span></h2>
+    <span class="en" data-only="ko">Browser Utilities</span>
+  </div>
+
+  <!-- A1 -->
+  <article class="card">
+    <div class="card-top">
+      <div class="icon">🧹</div>
+      <div>
+        <h3>인터넷 사용기록 삭제 도구<span class="en">Internet History Cleaner</span></h3>
+      </div>
+    </div>
+    <p class="oneliner" data-only="ko">Chrome의 사용기록·쿠키·캐시를 항목과 기간별로 골라 클릭 한 번에 삭제합니다. 사이트별 로그인은 유지한 채, 필요한 것만 정확히 지우세요.</p>
+    <p class="oneliner" data-only="en">Clear Chrome history, cookies, and cache by type and time range in a single click. Keep the logins you want and wipe only what you choose.</p>
+    <ul class="feat" data-only="ko">
+      <li>6가지 항목 선택 삭제 — 사용기록·다운로드·쿠키·캐시·비밀번호·자동완성</li>
+      <li>기간 지정 — 1시간 / 24시간 / 7일 / 4주 / 전체, 또는 시작 시점 직접 지정</li>
+      <li>'전체 선택' 일괄 토글과 삭제 전 확인 단계로 실수 방지</li>
+      <li>Chrome 공식 API(chrome.browsingData) 사용, 기기 내 처리·외부 전송 없음</li>
+      <li>시스템 설정에 맞춰 라이트·다크 자동 전환</li>
+    </ul>
+    <ul class="feat" data-only="en">
+      <li>Selective deletion of 6 data types — history, downloads, cookies, cache, passwords, autofill</li>
+      <li>Time range — last hour / 24h / 7 days / 4 weeks / all time, or a custom start point</li>
+      <li>"Select all" toggle plus a confirmation step to prevent mistakes</li>
+      <li>Uses the official chrome.browsingData API; on-device, nothing sent out</li>
+      <li>Auto light/dark to match your system</li>
+    </ul>
+    <div class="meta">
+      <span class="chip"><span data-only="ko">도구</span><span data-only="en">Tools</span></span>
+      <span class="chip">v1.2</span>
+      <span class="chip"><span data-only="ko">이용자 35명</span><span data-only="en">35 users</span></span>
+      <span class="chip">🇰🇷 한국어</span>
+    </div>
+    <div class="card-actions">
+      <a class="btn-install" href="https://chromewebstore.google.com/detail/bchofkfhcnjnccofldlaoebjafhkgmog" target="_blank" rel="noopener">➕ <span data-only="ko">웹스토어에서 설치</span><span data-only="en">Add to Chrome</span></a>
+      <button class="btn-copy" data-copy="a1"><span data-only="ko">📋 소개문구 복사</span><span data-only="en">📋 Copy text</span></button>
+    </div>
+  </article>
+
+  <!-- A2 -->
+  <article class="card">
+    <div class="card-top">
+      <div class="icon">🔀</div>
+      <div>
+        <h3>확장 프로그램 스위치 — 일괄 켜기/끄기<span class="en">Extension Switch — Bulk Enable/Disable</span></h3>
+      </div>
+    </div>
+    <p class="oneliner" data-only="ko">설치된 모든 확장을 버튼 하나로 켜고 끕니다. 개별 토글과 우클릭 일괄 메뉴, 상태 저장·복원까지 지원합니다.</p>
+    <p class="oneliner" data-only="en">Turn all your extensions on or off with a single button. Individual toggles, a right-click bulk menu, and save/restore included.</p>
+    <ul class="feat" data-only="ko">
+      <li>[모두 끄기] · [모두 켜기] 원클릭 일괄 제어</li>
+      <li>자동 복원 — 끄기 직전 켜져 있던 확장만 기억했다가 정확히 되돌리기</li>
+      <li>상태 저장/복원 — 지금의 켜짐·꺼짐 구성을 통째로 저장</li>
+      <li>개별 토글 + 이름 검색, 툴바 아이콘 우클릭 일괄 메뉴</li>
+      <li>자기 자신·정책 고정 확장·테마는 자동 제외(안전장치)</li>
+    </ul>
+    <ul class="feat" data-only="en">
+      <li>One-click "Disable all" / "Enable all"</li>
+      <li>Auto-restore — remembers what was on and puts it back exactly</li>
+      <li>Save/restore your entire enabled/disabled setup</li>
+      <li>Per-extension toggle with name search + right-click bulk menu</li>
+      <li>Skips itself, policy-locked extensions, and themes (safety)</li>
+    </ul>
+    <div class="meta">
+      <span class="chip"><span data-only="ko">도구</span><span data-only="en">Tools</span></span>
+      <span class="chip">v1.1</span>
+      <span class="chip"><span data-only="ko">이용자 33명</span><span data-only="en">33 users</span></span>
+      <span class="chip star">★ 5.0</span>
+      <span class="chip">🇰🇷 한국어</span>
+    </div>
+    <div class="card-actions">
+      <a class="btn-install" href="https://chromewebstore.google.com/detail/egmjglcjeeeejdboojfdhmkppdhoeofl" target="_blank" rel="noopener">➕ <span data-only="ko">웹스토어에서 설치</span><span data-only="en">Add to Chrome</span></a>
+      <button class="btn-copy" data-copy="a2"><span data-only="ko">📋 소개문구 복사</span><span data-only="en">📋 Copy text</span></button>
+    </div>
+  </article>
+
+  <!-- A3 -->
+  <article class="card">
+    <div class="card-top">
+      <div class="icon">🎬</div>
+      <div>
+        <h3>Video Downloader — StreamGrabber<span class="en">Video Downloader — StreamGrabber</span></h3>
+      </div>
+    </div>
+    <p class="oneliner" data-only="ko">웹페이지에서 재생되는 동영상·오디오·HLS·DASH 스트림을 감지해 MP4로 다운로드합니다. 감지부터 저장까지 모두 브라우저 안에서 이뤄집니다.</p>
+    <p class="oneliner" data-only="en">Detects videos, audio, and HLS/DASH streams playing on a page and saves them as MP4 — all inside your browser.</p>
+    <ul class="feat" data-only="ko">
+      <li>현재 탭의 직접 미디어(MP4·WebM·MP3 등)와 HLS(.m3u8)·DASH(.mpd) 감지</li>
+      <li>HLS 세그먼트를 브라우저 안에서 하나의 MP4로 리먹싱(재인코딩 없이 무손실)</li>
+      <li>화질(변형) 선택 다운로드, yt-dlp 명령·미디어 URL 복사</li>
+      <li>'저장됨' 목록 보관, 내장 플레이어 재생·Chromecast 전송</li>
+      <li>전부 로컬 처리·데이터 수집 없음(DRM/암호화 스트림은 미지원)</li>
+    </ul>
+    <ul class="feat" data-only="en">
+      <li>Detects direct media (MP4/WebM/MP3, etc.) plus HLS (.m3u8) and DASH (.mpd) manifests</li>
+      <li>Remuxes HLS segments into one MP4 in-browser (no re-encoding, no quality loss)</li>
+      <li>Choose quality/variant; copy a yt-dlp command or the media URL</li>
+      <li>"Saved" list, built-in player, and Chromecast casting</li>
+      <li>Fully local, no data collection (DRM/encrypted streams not supported)</li>
+    </ul>
+    <div class="caution" data-only="ko">⚠️ 본인이 권리를 갖거나 이용약관상 허용된 미디어만 내려받으세요.</div>
+    <div class="caution" data-only="en">⚠️ Only download media you have the rights to or that the site's terms permit.</div>
+    <div class="meta">
+      <span class="chip"><span data-only="ko">도구</span><span data-only="en">Tools</span></span>
+      <span class="chip">v1.1.0</span>
+      <span class="chip"><span data-only="ko">이용자 14명</span><span data-only="en">14 users</span></span>
+      <span class="chip">🇰🇷 한국어</span>
+    </div>
+    <div class="card-actions">
+      <a class="btn-install" href="https://chromewebstore.google.com/detail/gaponnjofdbdoldmicifdbhedfnhahoc" target="_blank" rel="noopener">➕ <span data-only="ko">웹스토어에서 설치</span><span data-only="en">Add to Chrome</span></a>
+      <button class="btn-copy" data-copy="a3"><span data-only="ko">📋 소개문구 복사</span><span data-only="en">📋 Copy text</span></button>
+    </div>
+  </article>
+
+  <!-- GROUP B -->
+  <div class="section-head">
+    <span class="dot"></span>
+    <h2><span data-only="ko">서울대학교 도서관</span><span data-only="en">SNU Library</span></h2>
+    <span class="en" data-only="ko">SNU Library</span>
+  </div>
+
+  <!-- B1 -->
+  <article class="card">
+    <div class="card-top">
+      <div class="icon">🔎</div>
+      <div>
+        <h3>서울대학교 도서관 검색 지원 플러그인<span class="en">SNU Library Search Helper</span></h3>
+      </div>
+    </div>
+    <p class="oneliner" data-only="ko">서울대학교 도서관 홈페이지와 각종 학술 사이트에서의 검색을 더 편리하게 도와줍니다.</p>
+    <p class="oneliner" data-only="en">Makes searching the SNU Library homepage and various academic sites easier.</p>
+    <ul class="feat" data-only="ko">
+      <li>서울대학교 도서관 홈페이지 검색 보조</li>
+      <li>각종 학술 사이트에서의 검색 지원</li>
+      <li>한국어 UI, 개인정보 수집 없음</li>
+    </ul>
+    <ul class="feat" data-only="en">
+      <li>Search assistance on the SNU Library homepage</li>
+      <li>Support for searching across academic sites</li>
+      <li>Korean UI, no personal data collected</li>
+    </ul>
+    <div class="meta">
+      <span class="chip"><span data-only="ko">도구</span><span data-only="en">Tools</span></span>
+      <span class="chip">v3.2.2</span>
+      <span class="chip"><span data-only="ko">이용자 56명</span><span data-only="en">56 users</span></span>
+      <span class="chip star">★ 5.0</span>
+      <span class="chip">🇰🇷 한국어</span>
+    </div>
+    <div class="card-actions">
+      <a class="btn-install" href="https://chromewebstore.google.com/detail/edefhmnlcmopdnkeofmojgnfpclehgmh" target="_blank" rel="noopener">➕ <span data-only="ko">웹스토어에서 설치</span><span data-only="en">Add to Chrome</span></a>
+      <button class="btn-copy" data-copy="b1"><span data-only="ko">📋 소개문구 복사</span><span data-only="en">📋 Copy text</span></button>
+    </div>
+  </article>
+
+  <!-- B2 -->
+  <article class="card">
+    <div class="card-top">
+      <div class="icon">🎓</div>
+      <div>
+        <h3>서울대학교 도서관 학외접속 Easy Proxy<span class="en">SNU Library Off-Campus Easy Proxy</span></h3>
+      </div>
+    </div>
+    <p class="oneliner" data-only="ko">서울대 도서관 전자자원을 교외에서도 이용하세요. 학외접속 지원 사이트를 자동으로 확인하고 원클릭으로 연결합니다.</p>
+    <p class="oneliner" data-only="en">Use SNU Library e-resources from off campus. It checks whether a site supports off-campus access and connects in one click.</p>
+    <ul class="feat" data-only="ko">
+      <li>학외접속 지원 사이트 여부 자동 확인</li>
+      <li>아이콘 클릭 → 학외접속 연결 버튼으로 원클릭 접속</li>
+      <li>최초 1회 서울대학교 중앙도서관 로그인 인증 필요</li>
+      <li>2018.1.1자 구독 리스트 적용</li>
+    </ul>
+    <ul class="feat" data-only="en">
+      <li>Automatically checks whether a site supports off-campus access</li>
+      <li>Click the icon → "Connect" for one-click off-campus access</li>
+      <li>A one-time SNU Central Library login is required on first use</li>
+      <li>Applies the subscription list (as of 2018-01-01)</li>
+    </ul>
+    <div class="meta">
+      <span class="chip"><span data-only="ko">접근성</span><span data-only="en">Accessibility</span></span>
+      <span class="chip">v3.2.2</span>
+      <span class="chip"><span data-only="ko">이용자 381명</span><span data-only="en">381 users</span></span>
+      <span class="chip star">★ 5.0</span>
+      <span class="chip top"><span data-only="ko">가장 인기</span><span data-only="en">Most popular</span></span>
+    </div>
+    <div class="card-actions">
+      <a class="btn-install" href="https://chromewebstore.google.com/detail/cojinghdbmdndfhpogoibdnfoiaimgnf" target="_blank" rel="noopener">➕ <span data-only="ko">웹스토어에서 설치</span><span data-only="en">Add to Chrome</span></a>
+      <button class="btn-copy" data-copy="b2"><span data-only="ko">📋 소개문구 복사</span><span data-only="en">📋 Copy text</span></button>
+    </div>
+  </article>
+
+  <!-- B3 -->
+  <article class="card">
+    <div class="card-top">
+      <div class="icon">🏛️</div>
+      <div>
+        <h3>서울대학교 도서관 학외접속 지원 플러그인<span class="en">SNU Library Off-Campus Access Helper</span></h3>
+      </div>
+    </div>
+    <p class="oneliner" data-only="ko">서울대 도서관 전자자원을 교외에서도. 툴바 아이콘 클릭이나 우클릭 메뉴로 지금 보고 있는 페이지를 학외접속으로 연결합니다.</p>
+    <p class="oneliner" data-only="en">Access SNU Library e-resources from off campus. Connect the current page for off-campus access from the toolbar icon or the right-click menu.</p>
+    <ul class="feat" data-only="ko">
+      <li>상단 플러그인 아이콘 클릭으로 현재 페이지 학외접속 연결</li>
+      <li>우클릭(컨텍스트) 메뉴로도 바로 연결</li>
+      <li>최초 1회 서울대학교 중앙도서관 홈페이지 로그인 인증 필요</li>
+      <li>한국어 UI, 개인정보 수집 없음</li>
+    </ul>
+    <ul class="feat" data-only="en">
+      <li>Connect the current page for off-campus access from the toolbar icon</li>
+      <li>Also connects directly via the right-click (context) menu</li>
+      <li>A one-time SNU Central Library login is required on first use</li>
+      <li>Korean UI, no personal data collected</li>
+    </ul>
+    <div class="caution" data-only="ko">💡 사이트 목록 자동 확인·구독 리스트가 필요하면 Easy Proxy를, 아이콘/우클릭으로 간단히 연결하려면 이 플러그인을 사용하세요.</div>
+    <div class="caution" data-only="en">💡 Choose Easy Proxy for automatic site-list checking; choose this helper for quick icon/right-click connections.</div>
+    <div class="meta">
+      <span class="chip"><span data-only="ko">접근성</span><span data-only="en">Accessibility</span></span>
+      <span class="chip">v3.2.1</span>
+      <span class="chip"><span data-only="ko">이용자 281명</span><span data-only="en">281 users</span></span>
+      <span class="chip star">★ 5.0</span>
+      <span class="chip">🇰🇷 한국어</span>
+    </div>
+    <div class="card-actions">
+      <a class="btn-install" href="https://chromewebstore.google.com/detail/ldhnmofgmfjfdfmemhmcodhnpfdphegk" target="_blank" rel="noopener">➕ <span data-only="ko">웹스토어에서 설치</span><span data-only="en">Add to Chrome</span></a>
+      <button class="btn-copy" data-copy="b3"><span data-only="ko">📋 소개문구 복사</span><span data-only="en">📋 Copy text</span></button>
+    </div>
+  </article>
+
+  <!-- KO-FI -->
+  <section class="kofi">
+    <h2>☕ <span data-only="ko">후원하기</span><span data-only="en">Support</span></h2>
+    <p data-only="ko">이 확장들이 도움이 되었다면, 커피 한 잔으로 응원해 주세요. 여러분의 후원이 다음 업데이트를 만듭니다.</p>
+    <p data-only="en">If these extensions helped you, support the work with a coffee. Your support powers the next update.</p>
+    <a class="btn-kofi" href="https://ko-fi.com/swzlab" target="_blank" rel="noopener">☕ <span data-only="ko">Ko-fi에서 후원하기</span><span data-only="en">Support me on Ko-fi</span></a>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <p class="priv" data-only="ko"><strong>개인정보 보호</strong> — 모든 확장은 개인정보를 수집하거나 외부로 전송하지 않으며, 모든 작업은 사용자의 기기 안에서만 처리됩니다.</p>
+    <p class="priv" data-only="en"><strong>Privacy</strong> — None of these extensions collect or transmit personal data; everything runs on your device.</p>
+    <p>문의 / Contact: swz@kakao.com · 제공 / Offered by: SWZ Lab (swz)</p>
+    <p style="opacity:.6">© 2026 SWZ Lab · v0.3</p>
+  </div>
+</footer>
+
+<div class="toast" id="toast">복사됨!</div>
+
+<script>
+  const html=document.documentElement;
+  const themeBtn=document.getElementById('themeBtn');
+  function setTheme(t){html.setAttribute('data-theme',t);
+    themeBtn.textContent = t==='dark' ? '☀️ 라이트' : '🌙 다크';}
+  setTheme(window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark':'light');
+  themeBtn.onclick=()=>setTheme(html.getAttribute('data-theme')==='dark'?'light':'dark');
+  const langBtn=document.getElementById('langBtn');
+  function setLang(l){html.setAttribute('data-lang',l); html.setAttribute('lang',l);
+    langBtn.textContent = l==='ko' ? 'EN' : '한국어';}
+  setLang('ko');
+  langBtn.onclick=()=>setLang(html.getAttribute('data-lang')==='ko'?'en':'ko');
+
+  const copyData={
+    a1:`인터넷 사용기록 삭제 도구 / Internet History Cleaner
+
+Chrome의 사용기록·쿠키·캐시를 항목과 기간별로 골라 클릭 한 번에 삭제합니다. 사이트별 로그인은 유지한 채, 필요한 것만 정확히 지우세요.
+Clear Chrome history, cookies, and cache by type and time range in a single click. Keep the logins you want and wipe only what you choose.
+
+· 6가지 항목 선택 삭제 — 사용기록·다운로드·쿠키·캐시·비밀번호·자동완성
+· 기간 지정 — 1시간 / 24시간 / 7일 / 4주 / 전체, 또는 시작 시점 직접 지정
+· '전체 선택' 일괄 토글과 삭제 전 확인 단계로 실수 방지
+· Chrome 공식 API 사용, 기기 내 처리·외부 전송 없음
+· 시스템 설정에 맞춰 라이트·다크 자동 전환
+
+설치: https://chromewebstore.google.com/detail/bchofkfhcnjnccofldlaoebjafhkgmog`,
+    a2:`확장 프로그램 스위치 — 일괄 켜기/끄기 / Extension Switch — Bulk Enable/Disable
+
+설치된 모든 확장을 버튼 하나로 켜고 끕니다. 개별 토글과 우클릭 일괄 메뉴, 상태 저장·복원까지 지원합니다.
+Turn all your extensions on or off with a single button. Individual toggles, a right-click bulk menu, and save/restore included.
+
+· [모두 끄기] · [모두 켜기] 원클릭 일괄 제어
+· 자동 복원 — 끄기 직전 켜져 있던 확장만 기억했다가 정확히 되돌리기
+· 상태 저장/복원 — 지금의 켜짐·꺼짐 구성을 통째로 저장
+· 개별 토글 + 이름 검색, 툴바 아이콘 우클릭 일괄 메뉴
+· 자기 자신·정책 고정 확장·테마는 자동 제외(안전장치)
+
+설치: https://chromewebstore.google.com/detail/egmjglcjeeeejdboojfdhmkppdhoeofl`,
+    a3:`Video Downloader — StreamGrabber
+
+웹페이지에서 재생되는 동영상·오디오·HLS·DASH 스트림을 감지해 MP4로 다운로드합니다. 감지부터 저장까지 모두 브라우저 안에서 이뤄집니다.
+Detects videos, audio, and HLS/DASH streams playing on a page and saves them as MP4 — all inside your browser.
+
+· 현재 탭의 직접 미디어(MP4·WebM·MP3 등)와 HLS(.m3u8)·DASH(.mpd) 감지
+· HLS 세그먼트를 브라우저 안에서 하나의 MP4로 리먹싱(재인코딩 없이 무손실)
+· 화질(변형) 선택 다운로드, yt-dlp 명령·미디어 URL 복사
+· '저장됨' 목록 보관, 내장 플레이어 재생·Chromecast 전송
+· 전부 로컬 처리·데이터 수집 없음(DRM/암호화 스트림은 미지원)
+
+⚠️ 본인이 권리를 갖거나 이용약관상 허용된 미디어만 내려받으세요.
+설치: https://chromewebstore.google.com/detail/gaponnjofdbdoldmicifdbhedfnhahoc`,
+    b1:`서울대학교 도서관 검색 지원 플러그인 / SNU Library Search Helper
+
+서울대학교 도서관 홈페이지와 각종 학술 사이트에서의 검색을 더 편리하게 도와줍니다.
+Makes searching the SNU Library homepage and various academic sites easier.
+
+· 서울대학교 도서관 홈페이지 검색 보조
+· 각종 학술 사이트에서의 검색 지원
+· 한국어 UI, 개인정보 수집 없음
+
+설치: https://chromewebstore.google.com/detail/edefhmnlcmopdnkeofmojgnfpclehgmh`,
+    b2:`서울대학교 도서관 학외접속 Easy Proxy / SNU Library Off-Campus Easy Proxy
+
+서울대 도서관 전자자원을 교외에서도 이용하세요. 학외접속 지원 사이트를 자동으로 확인하고 원클릭으로 연결합니다.
+Use SNU Library e-resources from off campus. It checks whether a site supports off-campus access and connects in one click.
+
+· 학외접속 지원 사이트 여부 자동 확인
+· 아이콘 클릭 → 학외접속 연결 버튼으로 원클릭 접속
+· 최초 1회 서울대학교 중앙도서관 로그인 인증 필요
+· 2018.1.1자 구독 리스트 적용
+
+설치: https://chromewebstore.google.com/detail/cojinghdbmdndfhpogoibdnfoiaimgnf`,
+    b3:`서울대학교 도서관 학외접속 지원 플러그인 / SNU Library Off-Campus Access Helper
+
+서울대 도서관 전자자원을 교외에서도. 툴바 아이콘 클릭이나 우클릭 메뉴로 지금 보고 있는 페이지를 학외접속으로 연결합니다.
+Access SNU Library e-resources from off campus. Connect the current page via the toolbar icon or the right-click menu.
+
+· 상단 플러그인 아이콘 클릭으로 현재 페이지 학외접속 연결
+· 우클릭(컨텍스트) 메뉴로도 바로 연결
+· 최초 1회 서울대학교 중앙도서관 홈페이지 로그인 인증 필요
+· 한국어 UI, 개인정보 수집 없음
+
+※ 사이트 목록 자동 확인·구독 리스트가 필요하면 Easy Proxy를, 아이콘/우클릭으로 간단히 연결하려면 이 플러그인을 사용하세요.
+설치: https://chromewebstore.google.com/detail/ldhnmofgmfjfdfmemhmcodhnpfdphegk`
+  };
+  const toast=document.getElementById('toast');
+  let toastTimer;
+  document.querySelectorAll('.btn-copy').forEach(b=>{
+    b.onclick=async()=>{
+      const t=copyData[b.dataset.copy]||'';
+      try{await navigator.clipboard.writeText(t);}
+      catch(e){const ta=document.createElement('textarea');ta.value=t;document.body.appendChild(ta);ta.select();document.execCommand('copy');ta.remove();}
+      toast.textContent = html.getAttribute('data-lang')==='ko' ? '✓ 복사됨!' : '✓ Copied!';
+      toast.classList.add('show');clearTimeout(toastTimer);
+      toastTimer=setTimeout(()=>toast.classList.remove('show'),1800);
+    };
+  });
+</script>
 </body>
 </html>
