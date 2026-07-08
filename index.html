@@ -85,9 +85,6 @@
     color:#fff;text-decoration:none;font-weight:800;font-size:14px;padding:11px 20px;border-radius:12px;
     box-shadow:0 6px 18px color-mix(in srgb,var(--peri) 40%,transparent);transition:.2s}
   .btn-install:hover{filter:brightness(1.06);transform:translateY(-1px)}
-  .btn-copy{border:1px solid var(--line);background:var(--surface-2);color:var(--muted);font-weight:700;font-size:13px;
-    padding:11px 16px;border-radius:12px;cursor:pointer;transition:.2s}
-  .btn-copy:hover{border-color:var(--peri);color:var(--peri)}
   .caution{font-size:12.5px;color:var(--muted);margin:-6px 0 16px;padding:9px 13px;background:var(--surface-2);
     border-left:3px solid var(--peri);border-radius:8px}
 
@@ -110,10 +107,6 @@
   html[data-lang="en"] .card h3 .en,
   html[data-lang="en"] .hero h1 .en{color:var(--text)}
 
-  .toast{position:fixed;bottom:26px;left:50%;transform:translateX(-50%) translateY(20px);
-    background:var(--text);color:var(--bg);padding:11px 20px;border-radius:12px;font-weight:700;font-size:14px;
-    opacity:0;pointer-events:none;transition:.25s;z-index:50}
-  .toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
 </style>
 </head>
 <body>
@@ -185,7 +178,6 @@
     </div>
     <div class="card-actions">
       <a class="btn-install" href="https://chromewebstore.google.com/detail/bchofkfhcnjnccofldlaoebjafhkgmog" target="_blank" rel="noopener">➕ <span data-only="ko">웹스토어에서 설치</span><span data-only="en">Add to Chrome</span></a>
-      <button class="btn-copy" data-copy="a1"><span data-only="ko">📋 소개문구 복사</span><span data-only="en">📋 Copy text</span></button>
     </div>
   </article>
 
@@ -222,7 +214,6 @@
     </div>
     <div class="card-actions">
       <a class="btn-install" href="https://chromewebstore.google.com/detail/egmjglcjeeeejdboojfdhmkppdhoeofl" target="_blank" rel="noopener">➕ <span data-only="ko">웹스토어에서 설치</span><span data-only="en">Add to Chrome</span></a>
-      <button class="btn-copy" data-copy="a2"><span data-only="ko">📋 소개문구 복사</span><span data-only="en">📋 Copy text</span></button>
     </div>
   </article>
 
@@ -260,7 +251,6 @@
     </div>
     <div class="card-actions">
       <a class="btn-install" href="https://chromewebstore.google.com/detail/gaponnjofdbdoldmicifdbhedfnhahoc" target="_blank" rel="noopener">➕ <span data-only="ko">웹스토어에서 설치</span><span data-only="en">Add to Chrome</span></a>
-      <button class="btn-copy" data-copy="a3"><span data-only="ko">📋 소개문구 복사</span><span data-only="en">📋 Copy text</span></button>
     </div>
   </article>
 
@@ -300,7 +290,6 @@
     </div>
     <div class="card-actions">
       <a class="btn-install" href="https://chromewebstore.google.com/detail/edefhmnlcmopdnkeofmojgnfpclehgmh" target="_blank" rel="noopener">➕ <span data-only="ko">웹스토어에서 설치</span><span data-only="en">Add to Chrome</span></a>
-      <button class="btn-copy" data-copy="b1"><span data-only="ko">📋 소개문구 복사</span><span data-only="en">📋 Copy text</span></button>
     </div>
   </article>
 
@@ -335,7 +324,6 @@
     </div>
     <div class="card-actions">
       <a class="btn-install" href="https://chromewebstore.google.com/detail/cojinghdbmdndfhpogoibdnfoiaimgnf" target="_blank" rel="noopener">➕ <span data-only="ko">웹스토어에서 설치</span><span data-only="en">Add to Chrome</span></a>
-      <button class="btn-copy" data-copy="b2"><span data-only="ko">📋 소개문구 복사</span><span data-only="en">📋 Copy text</span></button>
     </div>
   </article>
 
@@ -372,7 +360,6 @@
     </div>
     <div class="card-actions">
       <a class="btn-install" href="https://chromewebstore.google.com/detail/ldhnmofgmfjfdfmemhmcodhnpfdphegk" target="_blank" rel="noopener">➕ <span data-only="ko">웹스토어에서 설치</span><span data-only="en">Add to Chrome</span></a>
-      <button class="btn-copy" data-copy="b3"><span data-only="ko">📋 소개문구 복사</span><span data-only="en">📋 Copy text</span></button>
     </div>
   </article>
 
@@ -391,11 +378,10 @@
     <p class="priv" data-only="ko"><strong>개인정보 보호</strong> — 모든 확장은 개인정보를 수집하거나 외부로 전송하지 않으며, 모든 작업은 사용자의 기기 안에서만 처리됩니다.</p>
     <p class="priv" data-only="en"><strong>Privacy</strong> — None of these extensions collect or transmit personal data; everything runs on your device.</p>
     <p>문의 / Contact: swz@kakao.com · 제공 / Offered by: SWZ Lab (swz)</p>
-    <p style="opacity:.6">© 2026 SWZ Lab · v0.3</p>
+    <p style="opacity:.6">© 2026 SWZ Lab · v0.4</p>
   </div>
 </footer>
 
-<div class="toast" id="toast">복사됨!</div>
 
 <script>
   const html=document.documentElement;
@@ -409,91 +395,6 @@
     langBtn.textContent = l==='ko' ? 'EN' : '한국어';}
   setLang('ko');
   langBtn.onclick=()=>setLang(html.getAttribute('data-lang')==='ko'?'en':'ko');
-
-  const copyData={
-    a1:`인터넷 사용기록 삭제 도구 / Internet History Cleaner
-
-Chrome의 사용기록·쿠키·캐시를 항목과 기간별로 골라 클릭 한 번에 삭제합니다. 사이트별 로그인은 유지한 채, 필요한 것만 정확히 지우세요.
-Clear Chrome history, cookies, and cache by type and time range in a single click. Keep the logins you want and wipe only what you choose.
-
-· 6가지 항목 선택 삭제 — 사용기록·다운로드·쿠키·캐시·비밀번호·자동완성
-· 기간 지정 — 1시간 / 24시간 / 7일 / 4주 / 전체, 또는 시작 시점 직접 지정
-· '전체 선택' 일괄 토글과 삭제 전 확인 단계로 실수 방지
-· Chrome 공식 API 사용, 기기 내 처리·외부 전송 없음
-· 시스템 설정에 맞춰 라이트·다크 자동 전환
-
-설치: https://chromewebstore.google.com/detail/bchofkfhcnjnccofldlaoebjafhkgmog`,
-    a2:`확장 프로그램 스위치 — 일괄 켜기/끄기 / Extension Switch — Bulk Enable/Disable
-
-설치된 모든 확장을 버튼 하나로 켜고 끕니다. 개별 토글과 우클릭 일괄 메뉴, 상태 저장·복원까지 지원합니다.
-Turn all your extensions on or off with a single button. Individual toggles, a right-click bulk menu, and save/restore included.
-
-· [모두 끄기] · [모두 켜기] 원클릭 일괄 제어
-· 자동 복원 — 끄기 직전 켜져 있던 확장만 기억했다가 정확히 되돌리기
-· 상태 저장/복원 — 지금의 켜짐·꺼짐 구성을 통째로 저장
-· 개별 토글 + 이름 검색, 툴바 아이콘 우클릭 일괄 메뉴
-· 자기 자신·정책 고정 확장·테마는 자동 제외(안전장치)
-
-설치: https://chromewebstore.google.com/detail/egmjglcjeeeejdboojfdhmkppdhoeofl`,
-    a3:`Video Downloader — StreamGrabber
-
-웹페이지에서 재생되는 동영상·오디오·HLS·DASH 스트림을 감지해 MP4로 다운로드합니다. 감지부터 저장까지 모두 브라우저 안에서 이뤄집니다.
-Detects videos, audio, and HLS/DASH streams playing on a page and saves them as MP4 — all inside your browser.
-
-· 현재 탭의 직접 미디어(MP4·WebM·MP3 등)와 HLS(.m3u8)·DASH(.mpd) 감지
-· HLS 세그먼트를 브라우저 안에서 하나의 MP4로 리먹싱(재인코딩 없이 무손실)
-· 화질(변형) 선택 다운로드, yt-dlp 명령·미디어 URL 복사
-· '저장됨' 목록 보관, 내장 플레이어 재생·Chromecast 전송
-· 전부 로컬 처리·데이터 수집 없음(DRM/암호화 스트림은 미지원)
-
-⚠️ 본인이 권리를 갖거나 이용약관상 허용된 미디어만 내려받으세요.
-설치: https://chromewebstore.google.com/detail/gaponnjofdbdoldmicifdbhedfnhahoc`,
-    b1:`서울대학교 도서관 검색 지원 플러그인 / SNU Library Search Helper
-
-서울대학교 도서관 홈페이지와 각종 학술 사이트에서의 검색을 더 편리하게 도와줍니다.
-Makes searching the SNU Library homepage and various academic sites easier.
-
-· 서울대학교 도서관 홈페이지 검색 보조
-· 각종 학술 사이트에서의 검색 지원
-· 한국어 UI, 개인정보 수집 없음
-
-설치: https://chromewebstore.google.com/detail/edefhmnlcmopdnkeofmojgnfpclehgmh`,
-    b2:`서울대학교 도서관 학외접속 Easy Proxy / SNU Library Off-Campus Easy Proxy
-
-서울대 도서관 전자자원을 교외에서도 이용하세요. 학외접속 지원 사이트를 자동으로 확인하고 원클릭으로 연결합니다.
-Use SNU Library e-resources from off campus. It checks whether a site supports off-campus access and connects in one click.
-
-· 학외접속 지원 사이트 여부 자동 확인
-· 아이콘 클릭 → 학외접속 연결 버튼으로 원클릭 접속
-· 최초 1회 서울대학교 중앙도서관 로그인 인증 필요
-· 2018.1.1자 구독 리스트 적용
-
-설치: https://chromewebstore.google.com/detail/cojinghdbmdndfhpogoibdnfoiaimgnf`,
-    b3:`서울대학교 도서관 학외접속 지원 플러그인 / SNU Library Off-Campus Access Helper
-
-서울대 도서관 전자자원을 교외에서도. 툴바 아이콘 클릭이나 우클릭 메뉴로 지금 보고 있는 페이지를 학외접속으로 연결합니다.
-Access SNU Library e-resources from off campus. Connect the current page via the toolbar icon or the right-click menu.
-
-· 상단 플러그인 아이콘 클릭으로 현재 페이지 학외접속 연결
-· 우클릭(컨텍스트) 메뉴로도 바로 연결
-· 최초 1회 서울대학교 중앙도서관 홈페이지 로그인 인증 필요
-· 한국어 UI, 개인정보 수집 없음
-
-※ 사이트 목록 자동 확인·구독 리스트가 필요하면 Easy Proxy를, 아이콘/우클릭으로 간단히 연결하려면 이 플러그인을 사용하세요.
-설치: https://chromewebstore.google.com/detail/ldhnmofgmfjfdfmemhmcodhnpfdphegk`
-  };
-  const toast=document.getElementById('toast');
-  let toastTimer;
-  document.querySelectorAll('.btn-copy').forEach(b=>{
-    b.onclick=async()=>{
-      const t=copyData[b.dataset.copy]||'';
-      try{await navigator.clipboard.writeText(t);}
-      catch(e){const ta=document.createElement('textarea');ta.value=t;document.body.appendChild(ta);ta.select();document.execCommand('copy');ta.remove();}
-      toast.textContent = html.getAttribute('data-lang')==='ko' ? '✓ 복사됨!' : '✓ Copied!';
-      toast.classList.add('show');clearTimeout(toastTimer);
-      toastTimer=setTimeout(()=>toast.classList.remove('show'),1800);
-    };
-  });
 </script>
 </body>
 </html>
