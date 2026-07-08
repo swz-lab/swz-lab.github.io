@@ -11,17 +11,17 @@
 
 | 확장 프로그램 | 소개 | 설치 |
 |---|---|---|
-| 🧹 **인터넷 사용기록 삭제 도구** | 사용기록·쿠키·캐시를 항목과 기간별로 골라 클릭 한 번에 삭제. 사이트 로그인은 유지 | [웹스토어](https://chromewebstore.google.com/detail/bchofkfhcnjnccofldlaoebjafhkgmog) |
-| 🔀 **확장 프로그램 스위치** | 설치된 모든 확장을 버튼 하나로 일괄 켜기/끄기. 상태 저장·복원 지원 | [웹스토어](https://chromewebstore.google.com/detail/egmjglcjeeeejdboojfdhmkppdhoeofl) |
-| 🎬 **Video Downloader — StreamGrabber** | 웹페이지의 동영상·HLS·DASH 스트림을 감지해 MP4로 저장 | [웹스토어](https://chromewebstore.google.com/detail/gaponnjofdbdoldmicifdbhedfnhahoc) |
+| 🧹 **인터넷 사용기록 삭제 도구** | 사용기록·쿠키·캐시를 항목과 기간별로 골라 클릭 한 번에 삭제. 사이트 로그인은 유지 | [설치](https://chromewebstore.google.com/detail/bchofkfhcnjnccofldlaoebjafhkgmog) |
+| 🔀 **확장 프로그램 스위치** | 설치된 모든 확장을 버튼 하나로 일괄 켜기/끄기. 상태 저장·복원 지원 | [설치](https://chromewebstore.google.com/detail/egmjglcjeeeejdboojfdhmkppdhoeofl) |
+| 🎬 **Video Downloader — StreamGrabber** | 웹페이지의 동영상·HLS·DASH 스트림을 감지해 MP4로 저장 | [설치](https://chromewebstore.google.com/detail/gaponnjofdbdoldmicifdbhedfnhahoc) |
 
 ## 🎓 서울대학교 도서관
 
 | 확장 프로그램 | 소개 | 설치 |
 |---|---|---|
-| 🔎 **도서관 검색 지원 플러그인** | 도서관 홈페이지와 학술 사이트 검색을 더 편리하게 | [웹스토어](https://chromewebstore.google.com/detail/edefhmnlcmopdnkeofmojgnfpclehgmh) |
-| 🏛️ **학외접속 Easy Proxy** | 전자자원을 교외에서도. 지원 사이트를 자동 확인해 원클릭 연결 | [웹스토어](https://chromewebstore.google.com/detail/cojinghdbmdndfhpogoibdnfoiaimgnf) |
-| 🏛️ **학외접속 지원 플러그인** | 아이콘·우클릭 메뉴로 지금 보는 페이지를 학외접속 연결 | [웹스토어](https://chromewebstore.google.com/detail/ldhnmofgmfjfdfmemhmcodhnpfdphegk) |
+| 🔎 **도서관 검색 지원 플러그인** | 도서관 홈페이지와 학술 사이트 검색을 더 편리하게 | [설치](https://chromewebstore.google.com/detail/edefhmnlcmopdnkeofmojgnfpclehgmh) |
+| 🏛️ **학외접속 Easy Proxy** | 전자자원을 교외에서도. 지원 사이트를 자동 확인해 원클릭 연결 | [설치](https://chromewebstore.google.com/detail/cojinghdbmdndfhpogoibdnfoiaimgnf) |
+| 🏛️ **학외접속 지원 플러그인** | 아이콘·우클릭 메뉴로 지금 보는 페이지를 학외접속 연결 | [설치](https://chromewebstore.google.com/detail/ldhnmofgmfjfdfmemhmcodhnpfdphegk) |
 
 ---
 
@@ -47,16 +47,16 @@ A collection of **free** Chrome extensions by **SWZ Lab**. Everything runs on yo
 ### 🧩 Browser Utilities
 | Extension | About | Install |
 |---|---|---|
-| 🧹 **Internet History Cleaner** | Clear history, cookies, and cache by type and time range in one click | [Web Store](https://chromewebstore.google.com/detail/bchofkfhcnjnccofldlaoebjafhkgmog) |
-| 🔀 **Extension Switch** | Enable/disable all your extensions with one button; save & restore | [Web Store](https://chromewebstore.google.com/detail/egmjglcjeeeejdboojfdhmkppdhoeofl) |
-| 🎬 **Video Downloader — StreamGrabber** | Detect videos and HLS/DASH streams on a page and save them as MP4 | [Web Store](https://chromewebstore.google.com/detail/gaponnjofdbdoldmicifdbhedfnhahoc) |
+| 🧹 **Internet History Cleaner** | Clear history, cookies, and cache by type and time range in one click | [Install](https://chromewebstore.google.com/detail/bchofkfhcnjnccofldlaoebjafhkgmog) |
+| 🔀 **Extension Switch** | Enable/disable all your extensions with one button; save & restore | [Install](https://chromewebstore.google.com/detail/egmjglcjeeeejdboojfdhmkppdhoeofl) |
+| 🎬 **Video Downloader — StreamGrabber** | Detect videos and HLS/DASH streams on a page and save them as MP4 | [Install](https://chromewebstore.google.com/detail/gaponnjofdbdoldmicifdbhedfnhahoc) |
 
 ### 🎓 SNU Library
 | Extension | About | Install |
 |---|---|---|
-| 🔎 **Library Search Helper** | Makes searching the SNU Library and academic sites easier | [Web Store](https://chromewebstore.google.com/detail/edefhmnlcmopdnkeofmojgnfpclehgmh) |
-| 🏛️ **Off-Campus Easy Proxy** | Use e-resources off campus; auto-checks supported sites, one-click connect | [Web Store](https://chromewebstore.google.com/detail/cojinghdbmdndfhpogoibdnfoiaimgnf) |
-| 🏛️ **Off-Campus Access Helper** | Connect the current page for off-campus access via icon or right-click | [Web Store](https://chromewebstore.google.com/detail/ldhnmofgmfjfdfmemhmcodhnpfdphegk) |
+| 🔎 **Library Search Helper** | Makes searching the SNU Library and academic sites easier | [Install](https://chromewebstore.google.com/detail/edefhmnlcmopdnkeofmojgnfpclehgmh) |
+| 🏛️ **Off-Campus Easy Proxy** | Use e-resources off campus; auto-checks supported sites, one-click connect | [Install](https://chromewebstore.google.com/detail/cojinghdbmdndfhpogoibdnfoiaimgnf) |
+| 🏛️ **Off-Campus Access Helper** | Connect the current page for off-campus access via icon or right-click | [Install](https://chromewebstore.google.com/detail/ldhnmofgmfjfdfmemhmcodhnpfdphegk) |
 
 **Privacy** — None of these extensions collect or transmit personal data.
 **Support** — [Ko-fi](https://ko-fi.com/swzlab) · **Contact** — swz@kakao.com
