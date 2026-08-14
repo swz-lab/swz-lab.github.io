@@ -66,8 +66,9 @@
     padding:26px;margin-bottom:18px;box-shadow:var(--shadow);transition:transform .2s,border-color .2s}
   .card:hover{transform:translateY(-3px);border-color:var(--peri)}
   .card-top{display:flex;gap:16px;align-items:flex-start}
-  .icon{width:56px;height:56px;flex:0 0 56px;border-radius:15px;display:grid;place-items:center;font-size:27px;
-    background:linear-gradient(135deg,var(--peri-soft),var(--surface-2));border:1px solid var(--line)}
+  .icon{width:56px;height:56px;flex:0 0 56px;border-radius:15px;display:grid;place-items:center;padding:7px;
+    background:#fff;border:1px solid var(--line);overflow:hidden}
+  .icon img{width:100%;height:100%;object-fit:contain;display:block}
   .card h3{margin:0;font-size:19px;font-weight:800;letter-spacing:-.02em}
   .card h3 .en{display:block;font-size:13.5px;color:var(--muted);font-weight:700;margin-top:2px}
   .oneliner{margin:14px 0 16px;color:var(--text);font-size:15px}
@@ -149,7 +150,7 @@
   <!-- A1 -->
   <article class="card">
     <div class="card-top">
-      <div class="icon">🧹</div>
+      <div class="icon"><img src="img/history-cleaner.png" width="128" height="128" alt=""></div>
       <div>
         <h3>인터넷 사용기록 삭제 도구<span class="en">Internet History Cleaner</span></h3>
       </div>
@@ -184,7 +185,7 @@
   <!-- A2 -->
   <article class="card">
     <div class="card-top">
-      <div class="icon">🔀</div>
+      <div class="icon"><img src="img/extension-switch.png" width="128" height="128" alt=""></div>
       <div>
         <h3>확장 프로그램 스위치 — 일괄 켜기/끄기<span class="en">Extension Switch — Bulk Enable/Disable</span></h3>
       </div>
@@ -220,7 +221,7 @@
   <!-- A3 -->
   <article class="card">
     <div class="card-top">
-      <div class="icon">🎬</div>
+      <div class="icon"><img src="img/streamgrabber.png" width="128" height="128" alt=""></div>
       <div>
         <h3>Video Downloader — StreamGrabber<span class="en">Video Downloader — StreamGrabber</span></h3>
       </div>
@@ -257,7 +258,7 @@
   <!-- A4 -->
   <article class="card">
     <div class="card-top">
-      <div class="icon">🔄</div>
+      <div class="icon"><img src="img/loopwatch.png" width="128" height="128" alt=""></div>
       <div>
         <h3>LoopWatch — 자동 새로고침·변경 감지<span class="en">LoopWatch — Auto Refresh &amp; Change Detection</span></h3>
       </div>
@@ -301,7 +302,7 @@
   <!-- B1 -->
   <article class="card">
     <div class="card-top">
-      <div class="icon">🔎</div>
+      <div class="icon"><img src="img/snu-search.png" width="128" height="128" alt=""></div>
       <div>
         <h3>서울대학교 도서관 검색 지원 플러그인<span class="en">SNU Library Search Helper</span></h3>
       </div>
@@ -333,7 +334,7 @@
   <!-- B2 -->
   <article class="card">
     <div class="card-top">
-      <div class="icon">🎓</div>
+      <div class="icon"><img src="img/snu-easyproxy.png" width="128" height="128" alt=""></div>
       <div>
         <h3>서울대학교 도서관 학외접속 Easy Proxy<span class="en">SNU Library Off-Campus Easy Proxy</span></h3>
       </div>
@@ -367,7 +368,7 @@
   <!-- B3 -->
   <article class="card">
     <div class="card-top">
-      <div class="icon">🏛️</div>
+      <div class="icon"><img src="img/snu-offcampus.png" width="128" height="128" alt=""></div>
       <div>
         <h3>서울대학교 도서관 학외접속 지원 플러그인<span class="en">SNU Library Off-Campus Access Helper</span></h3>
       </div>
