@@ -12,6 +12,7 @@
 - **🧹 인터넷 사용기록 삭제 도구** — 사용기록·쿠키·캐시를 항목과 기간별로 골라 클릭 한 번에 삭제합니다. 사이트별 로그인은 유지. → [설치하기](https://chromewebstore.google.com/detail/bchofkfhcnjnccofldlaoebjafhkgmog)
 - **🔀 확장 프로그램 스위치** — 설치된 모든 확장을 버튼 하나로 일괄 켜기/끄기. 상태 저장·복원을 지원합니다. → [설치하기](https://chromewebstore.google.com/detail/egmjglcjeeeejdboojfdhmkppdhoeofl)
 - **🎬 Video Downloader — StreamGrabber** — 웹페이지의 동영상·HLS·DASH 스트림을 감지해 MP4로 저장합니다. → [설치하기](https://chromewebstore.google.com/detail/gaponnjofdbdoldmicifdbhedfnhahoc)
+- **🔄 LoopWatch — 자동 새로고침·변경 감지** — 정해둔 주기로 페이지를 새로고침하며 키워드·내용 변화를 감지하고, 무엇이 바뀌었는지 단어 단위로 기록해 알려줍니다. → [설치하기](https://chromewebstore.google.com/detail/iallohlnkikonhofkfidkcnocfkkghmh)
 
 ## 🎓 서울대학교 도서관
 
@@ -45,6 +46,7 @@
 - **🧹 Internet History Cleaner** — Clear history, cookies, and cache by type and time range in one click; keep the logins you want. → [Install](https://chromewebstore.google.com/detail/bchofkfhcnjnccofldlaoebjafhkgmog)
 - **🔀 Extension Switch** — Enable or disable all your extensions with one button; save and restore your setup. → [Install](https://chromewebstore.google.com/detail/egmjglcjeeeejdboojfdhmkppdhoeofl)
 - **🎬 Video Downloader — StreamGrabber** — Detect videos and HLS/DASH streams on a page and save them as MP4. → [Install](https://chromewebstore.google.com/detail/gaponnjofdbdoldmicifdbhedfnhahoc)
+- **🔄 LoopWatch — Auto Refresh & Change Detection** — Refresh a page on your schedule, detect keyword and content changes, and see exactly what changed with a word-level diff. → [Install](https://chromewebstore.google.com/detail/iallohlnkikonhofkfidkcnocfkkghmh)
 
 ### 🎓 SNU Library
 

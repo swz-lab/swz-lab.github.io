@@ -79,7 +79,7 @@
   .chip{font-size:12px;font-weight:700;background:var(--chip);color:var(--chip-text);padding:5px 11px;border-radius:999px}
   .chip.star{color:#B98900;background:#FFF4D6}
   html[data-theme="dark"] .chip.star{color:#FFD86B;background:#3A3216}
-  .chip.top{color:#fff;background:linear-gradient(135deg,var(--peri),var(--peri-2))}
+  .chip.top,.chip.new{color:#fff;background:linear-gradient(135deg,var(--peri),var(--peri-2))}
   .card-actions{display:flex;gap:10px;flex-wrap:wrap}
   .btn-install{display:inline-flex;align-items:center;gap:8px;background:linear-gradient(135deg,var(--peri),var(--peri-2));
     color:#fff;text-decoration:none;font-weight:800;font-size:14px;padding:11px 20px;border-radius:12px;
@@ -130,7 +130,7 @@
     <p class="note" data-only="ko">모두 무료이며, 모든 작업은 사용자의 기기 안에서만 처리됩니다. 어떤 데이터도 외부로 전송하지 않습니다.</p>
     <p class="note" data-only="en">All free. Everything runs on your device — no data ever leaves your browser.</p>
     <div class="badges">
-      <span class="badge">🧹 <span data-only="ko">유틸리티 3종</span><span data-only="en">3 utilities</span></span>
+      <span class="badge">🧹 <span data-only="ko">유틸리티 4종</span><span data-only="en">4 utilities</span></span>
       <span class="badge">🎓 <span data-only="ko">서울대 도서관 3종</span><span data-only="en">3 SNU Library tools</span></span>
       <span class="badge">🔒 <span data-only="ko">데이터 수집 없음</span><span data-only="en">No data collection</span></span>
     </div>
@@ -251,6 +251,43 @@
     </div>
     <div class="card-actions">
       <a class="btn-install" href="https://chromewebstore.google.com/detail/gaponnjofdbdoldmicifdbhedfnhahoc" target="_blank" rel="noopener">➕ <span data-only="ko">웹스토어에서 설치</span><span data-only="en">Add to Chrome</span></a>
+    </div>
+  </article>
+
+  <!-- A4 -->
+  <article class="card">
+    <div class="card-top">
+      <div class="icon">🔄</div>
+      <div>
+        <h3>LoopWatch — 자동 새로고침·변경 감지<span class="en">LoopWatch — Auto Refresh &amp; Change Detection</span></h3>
+      </div>
+    </div>
+    <p class="oneliner" data-only="ko">정해둔 주기로 페이지를 자동 새로고침하면서 <strong>무엇이 바뀌었는지</strong>까지 감지합니다. 키워드가 뜨거나 내용이 달라지면 알림으로 알려주고, 변경 내역을 단어 단위로 비교해 기록합니다.</p>
+    <p class="oneliner" data-only="en">Auto-refreshes a page on your schedule and detects <strong>what actually changed</strong>. Get notified the moment a keyword appears or content shifts, with a word-level diff of every change.</p>
+    <ul class="feat" data-only="ko">
+      <li>주기 설정 — 5초~24시간 프리셋·직접 입력·랜덤 간격, 요일/시간대 예약과 카운트다운 표시</li>
+      <li>감지 방식 4가지 — 일반 텍스트·정규식·CSS 선택자·XPath, 재고·가격·채용·예약 등 20종 패턴 템플릿</li>
+      <li>변경 이력 — 단어 단위 비교로 바뀐 부분만 표시, 숫자 값 추적과 임계값 알림</li>
+      <li>알림 — 브라우저 알림과 Discord·Slack·Telegram·Ntfy·이메일·웹훅 연동, 감지 시 자동 클릭·스크롤</li>
+      <li>캡차·오류 페이지 자동 인식, 적응형 주기로 불필요한 요청 최소화</li>
+    </ul>
+    <ul class="feat" data-only="en">
+      <li>Intervals from 5 seconds to 24 hours — presets, custom values, random ranges, day/time scheduling, live countdown</li>
+      <li>Four ways to watch — plain text, regex, CSS selector, XPath — plus 20 ready-made patterns (stock, price, hiring, bookings)</li>
+      <li>Change history with a word-level diff, numeric tracking, and threshold alerts</li>
+      <li>Notifications via the browser plus Discord, Slack, Telegram, Ntfy, email, and custom webhooks; auto-click and auto-scroll on a hit</li>
+      <li>Detects CAPTCHAs and error pages; adaptive intervals cut needless requests</li>
+    </ul>
+    <div class="caution" data-only="ko">⚠️ 사이트 이용약관을 지키는 선에서 새로고침 주기를 넉넉히 설정하세요. 알림 연동(웹훅·이메일)과 AI 표현식 생성은 사용자가 직접 켤 때만 외부와 통신합니다.</div>
+    <div class="caution" data-only="en">⚠️ Keep intervals generous and within each site's terms. Webhook/email notifications and the AI expression helper reach outside your browser only when you turn them on.</div>
+    <div class="meta">
+      <span class="chip"><span data-only="ko">생산성</span><span data-only="en">Productivity</span></span>
+      <span class="chip">v1.0.1</span>
+      <span class="chip">🇰🇷 한국어 · English</span>
+      <span class="chip new"><span data-only="ko">신규 출시</span><span data-only="en">New</span></span>
+    </div>
+    <div class="card-actions">
+      <a class="btn-install" href="https://chromewebstore.google.com/detail/iallohlnkikonhofkfidkcnocfkkghmh" target="_blank" rel="noopener">➕ <span data-only="ko">웹스토어에서 설치</span><span data-only="en">Add to Chrome</span></a>
     </div>
   </article>
 
@@ -375,10 +412,10 @@
 
 <footer>
   <div class="wrap">
-    <p class="priv" data-only="ko"><strong>개인정보 보호</strong> — 모든 확장은 개인정보를 수집하거나 외부로 전송하지 않으며, 모든 작업은 사용자의 기기 안에서만 처리됩니다.</p>
-    <p class="priv" data-only="en"><strong>Privacy</strong> — None of these extensions collect or transmit personal data; everything runs on your device.</p>
+    <p class="priv" data-only="ko"><strong>개인정보 보호</strong> — 모든 확장은 개인정보를 수집하거나 외부로 전송하지 않으며, 모든 작업은 사용자의 기기 안에서만 처리됩니다. 사용자가 직접 설정한 알림 연동(웹훅·이메일 등)만 예외적으로 외부와 통신합니다.</p>
+    <p class="priv" data-only="en"><strong>Privacy</strong> — None of these extensions collect or transmit personal data; everything runs on your device. The only exception is a notification integration (webhook, email) that you set up yourself.</p>
     <p>문의 / Contact: swz@kakao.com · 제공 / Offered by: SWZ Lab (swz)</p>
-    <p style="opacity:.6">© 2026 SWZ Lab · v0.4</p>
+    <p style="opacity:.6">© 2026 SWZ Lab · v0.5</p>
   </div>
 </footer>
 
